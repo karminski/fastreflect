@@ -21,7 +21,7 @@ AllElementsYouWant := fastreflect.SliceAllElements(YourSliceInterface)
 
 ```
 
-For more details please see: [FastReflect_test.go](./src/FastReflect_test.go)
+For more details please see: [FastReflect_test.go](./FastReflect_test.go)
 
 
 # Performance
