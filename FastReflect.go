@@ -181,7 +181,9 @@ func arrayAt(p unsafe.Pointer, i int, eltSize uintptr, whySafe string) unsafe.Po
 }
 
 
-// Access an interface (struct type) property by name
+// StructFieldByName returns the struct field with the given name.
+// It returns the nil if no field was found.
+// It panics if input data Kind is not struct.
 func StructFieldByName(structData interface{}, name string) interface{} {
     // unpack Struct
     e := (*emptyInterface)(unsafe.Pointer(&structData))
@@ -193,7 +195,7 @@ func StructFieldByName(structData interface{}, name string) interface{} {
         panic("invalied reflect.Value.Type")
     }
     
-    // struct input please
+    // please input a struct type data 
     if valueMetadataFlag != structKind {
         panic("fast-reflect: Field of non-struct type ")
     }
@@ -219,7 +221,11 @@ func StructFieldByName(structData interface{}, name string) interface{} {
     return packed
 }
 
+
 // Get all elements from an interface (slice type)
+// SliceAllElements returns the all elements from an interface (slice type).
+// It returns the nil if no field was found.
+// It panics if input data Kind is not slice.
 func SliceAllElements(sliceData interface{}) []interface{} {
     // unpack Struct
     e := (*emptyInterface)(unsafe.Pointer(&sliceData))
@@ -230,7 +236,7 @@ func SliceAllElements(sliceData interface{}) []interface{} {
         panic("invalied reflect.Value.Type")
     }
 
-    // slice input please
+    // please input a slice type data 
     if valueMetadataFlag != sliceKind {
         panic("fast-reflect: non-slice type ")
     }
