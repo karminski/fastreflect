@@ -26,17 +26,18 @@ AllElementsYouWant := fastreflect.SliceAllElements(YourSliceInterface)
 
 # Performance
 
-- 如果 interface 是 Struct, 根据属性名称获取它的属性, 性能是原生 reflect 的 **3.58x** 倍.
-- 如果 interface 是 Slice, 获取它所有的元素, 性能是原生 reflect 的 **4.3x** 倍.
+- 如果 interface 是 Struct, 根据属性名称获取它的属性, 性能是原生 reflect 的 **4.35x** 倍.
+- 如果 interface 是 Slice, 获取它所有的元素, 性能是原生 reflect 的 **3.1x** 倍.
 
 ```
-root# go test -bench=.
 goos: linux
 goarch: amd64
-BenchmarkStructFieldByName-8        14354080            78.6 ns/op
-BenchmarkInternalFieldByName-8       4009170           297 ns/op
-BenchmarkSliceAllElements-8         10825730           124 ns/op
-BenchmarkInternalIndex-8             2514120           489 ns/op
+pkg: fastreflect
+cpu: Intel(R) Xeon(R) CPU E3-1246 v3 @ 3.50GHz
+BenchmarkStructFieldByName-8        14697340            88.99 ns/op        0 B/op          0 allocs/op
+BenchmarkInternalFieldByName-8       3378478           353.4 ns/op        32 B/op          4 allocs/op
+BenchmarkSliceAllElements-8          9508502           128.9 ns/op       144 B/op          1 allocs/op
+BenchmarkInternalIndex-8             3015903           398.2 ns/op       216 B/op          9 allocs/op
 PASS
-ok      _/fastreflect/src   5.883s
+ok      fastreflect 5.907s
 ```
