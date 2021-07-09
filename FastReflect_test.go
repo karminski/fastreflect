@@ -137,7 +137,8 @@ func BenchmarkInternalIndex(b *testing.B) {
 	b.ResetTimer()
 	for n := 0; n < b.N; n++ {
 		s := reflect.ValueOf(SliceExampleI)
-        for i := 0; i < s.Len(); i++ {
+		slen := s.Len()
+        for i := 0; i < slen; i++ {
             elem[i] = s.Index(i)
         }
 		if len(elem) != 9 {
